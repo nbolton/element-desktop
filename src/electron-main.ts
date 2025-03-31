@@ -159,6 +159,12 @@ async function loadConfig(): Promise<void> {
             ? loadJsonFile(LocalConfigLocation)
             : loadJsonFile(app.getPath("userData"), "config.json");
 
+        if (LocalConfigLocation) {
+            console.log("Using config from: " + LocalConfigLocation);
+        } else {
+            console.log("Using: " + app.getPath("userData") + "/config.json");
+        }
+
         // If the local config has a homeserver defined, don't use the homeserver from the build
         // config. This is to avoid a problem where Riot thinks there are multiple homeservers
         // defined, and panics as a result.
